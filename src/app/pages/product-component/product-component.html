@@ -1,10 +1,10 @@
 <div class="container">
     <router-outlet></router-outlet>
-    <mat-toolbar>Products Management</mat-toolbar>
+    <mat-toolbar>GESTIÓN DE PRODUCTOS</mat-toolbar>
     <div class="table-container">
 
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Search product">
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar producto">
         </mat-form-field>
 
         <table mat-table [dataSource]="dataSource" matSort>

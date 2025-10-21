@@ -1,12 +1,20 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+// Asegúrate de que esta ruta de importación sea la correcta para tu LayoutComponent
 import { LayoutComponent } from './pages/layout-component/layout-component';
 
 @Component({
   selector: 'app-root',
-  imports: [LayoutComponent],
+  standalone: true,
+  // IMPORTANTE: Asegúrate de que LayoutComponent está aquí
+  imports: [
+    LayoutComponent, 
+    RouterOutlet
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('appointmentapp-frontend');
+  title = 'appointmentapp-frontend';
 }

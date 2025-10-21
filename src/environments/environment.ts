@@ -1,3 +1,4 @@
 export const environment = {
-     HOST: 'http://localhost:9090'
+  production: false,
+  HOST: 'http://localhost:8080' // O el puerto que estés usando, ej: 9090
 };
