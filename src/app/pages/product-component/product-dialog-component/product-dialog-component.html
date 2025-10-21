@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="operate()">
+    <h2 mat-dialog-title>{{ product.idProduct > 0 ? 'Edit Product' : 'New Product' }}</h2>
+
+    <mat-dialog-content>
+        <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="form.get('name').hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="form.get('name').hasError('minlength')">Name must have at least 3 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" required></textarea>
+            <mat-error *ngIf="form.get('description').hasError('required')">Description is required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="full-width">
+            <mat-label>Presentation</mat-label>
+            <input matInput formControlName="presentation" required>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+            <mat-label>Unit Price</mat-label>
+            <input type="number" matInput formControlName="unitPrice" required>
+            <mat-error *ngIf="form.get('unitPrice').hasError('min')">Price must be positive</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="half-width">
+            <mat-label>Stock</mat-label>
+            <input type="number" matInput formControlName="stock" required>
+             <mat-error *ngIf="form.get('stock').hasError('min')">Stock must be positive or zero</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Expiration Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="expired" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" [compareWith]="compareFn" required>
+                <mat-option *ngFor="let cat of categories$ | async" [value]="cat">
+                    {{cat.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Family</mat-label>
+            <mat-select formControlName="family" [compareWith]="compareFnFamily" required>
+                <mat-option *ngFor="let fam of families$ | async" [value]="fam">
+                    {{fam.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field class="full-width">
+            <mat-label>Laboratory</mat-label>
+            <mat-select formControlName="laboratory" [compareWith]="compareFnLaboratory" required>
+                <mat-option *ngFor="let lab of laboratories$ | async" [value]="lab">
+                    {{lab.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Accept</button>
+        <button mat-raised-button color="accent" type="button" (click)="close()">Cancel</button>
+    </mat-dialog-actions>
+
+</form>
